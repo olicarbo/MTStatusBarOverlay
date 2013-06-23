@@ -1166,13 +1166,18 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 	// gray status bar?
 	// on iPad the Default Status Bar Style is black too
 	if (style == UIStatusBarStyleDefault && !IsIPad && !IsIPhoneEmulationMode) {
-		// choose image depending on size
-		if (self.shrinked) {
-			self.statusBarBackgroundImageView.image = [self.defaultStatusBarImageShrinked stretchableImageWithLeftCapWidth:2.0f topCapHeight:0.0f];
-		} else {
-			self.statusBarBackgroundImageView.image = [self.defaultStatusBarImage stretchableImageWithLeftCapWidth:2.0f topCapHeight:0.0f];
-		}
-		statusBarBackgroundImageView_.backgroundColor = [UIColor clearColor];
+        if (self.customBackgroundColor) {
+            statusBarBackgroundImageView_.backgroundColor = self.customBackgroundColor;
+        }
+        else
+        {
+            // choose image depending on size
+            if (self.shrinked) {
+                self.statusBarBackgroundImageView.image = [self.defaultStatusBarImageShrinked stretchableImageWithLeftCapWidth:2.0f topCapHeight:0.0f];
+            } else {
+                self.statusBarBackgroundImageView.image = [self.defaultStatusBarImage stretchableImageWithLeftCapWidth:2.0f topCapHeight:0.0f];
+            }
+        }
 	}
 	// black status bar? -> no image
 	else {
@@ -1224,8 +1229,14 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 		self.historyTableView.separatorColor = kLightThemeDetailViewBorderColor;
 		self.detailTextView.textColor = kLightThemeHistoryTextColor;
         
-        self.progressView.backgroundColor = [UIColor clearColor];
-        self.progressView.image = [self.defaultStatusBarImageShrinked stretchableImageWithLeftCapWidth:2.0f topCapHeight:0.0f];
+        if (self.customBackgroundColor) {
+            self.progressView.backgroundColor = self.customBackgroundColor;
+            self.progressView.image = nil;
+        }
+        else {
+            self.progressView.backgroundColor = [UIColor clearColor];
+            self.progressView.image = [self.defaultStatusBarImageShrinked stretchableImageWithLeftCapWidth:2.0f topCapHeight:0.0f];
+        }
 	} else {
 		// set color of labels depending on messageType
         switch(messageType) {
