@@ -480,7 +480,13 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 ////////////////////////////////////////////////////////////////////////
 
 - (UIViewController *)rootViewController {
-    return [[UIApplication sharedApplication] keyWindow].rootViewController;
+    
+    if ([[UIApplication sharedApplication] keyWindow] != self)
+    {
+        return [[UIApplication sharedApplication] keyWindow].rootViewController;
+    }
+    
+    return NULL;
 }
 
 ////////////////////////////////////////////////////////////////////////
