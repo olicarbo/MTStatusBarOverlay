@@ -480,20 +480,13 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 ////////////////////////////////////////////////////////////////////////
 
 - (UIViewController *)rootViewController {
-    
-    if ([[UIApplication sharedApplication] keyWindow] != self)
-    {
-        return [[UIApplication sharedApplication] keyWindow].rootViewController;
-    }
-    
-    return NULL;
+    return [UIApplication sharedApplication].delegate.window.rootViewController;
 }
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark -
 #pragma mark Status Bar Appearance
-////////////////////////////////////////////////////////////////////////
-
+///////////////////////////////////////////////////////////////////////
 - (void)addSubviewToBackgroundView:(UIView *)view {
 	view.userInteractionEnabled = NO;
 	[self.backgroundView addSubview:view];
